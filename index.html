@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>jQuery validation login basic example</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+   <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<!-- <script type="text/javascript" src="main.js"></script> -->
+   <script>
+      //Configuration
+         var minUserLen = 5, maxUserLen = 40;
+         var minPassLen = 8, maxPassLen = 40;
+         var usernameMsg = "Username must be between " + minUserLen + " and " +
+                           maxUserLen + " characters, inclusive.";
+         var passwordMsg = "Password must be between " + minPassLen + " and " +
+                           maxPassLen + " characters, inclusive.";
+         jQuery.validator.setDefaults({
+            debug: true,      //Avoids form submit. Comment when in production.
+            success: "valid",
+            submitHandler: function() {
+               window.location.href = "profile.html";
+            }
+         });
+      $(document).ready(function() {
+      	$("#login").click(function(){
+
+		username = $("#username").val();
+		password = $("#password").val();
+
+		if(username == '' || password == '' ){
+			$("#common-alert").css("display", "block");
+		}else if(username.length <4){
+			$("#name-alert").css("display", "block");
+		}else if(password.length < 5){
+			$("#pass-alert").css("display", "block");
+		}
+
+
+		else{
+			$(".alert-success").css("display", "block");
+			window.location.href = "profile.html";
+		}
+
+	});
+ 
+      });
+   </script>
+   <style>
+ .login-form{width: 30%;margin: auto;margin-top: 25%;}
+
+   </style>
+   </head>
+<body>
+ 
+	<div class="login-area">
+		<div class="container">
+			<div class="row">
+                
+				<div class="login-form">
+
+					<div class="alert-msg">
+						<div class="alert alert-success alert-dismissable" style="display:none;">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Success!</strong> Login Successful.
+						</div>
+						<div id="common-alert" class="alert alert-danger alert-dismissable" style="display:none;">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Error!</strong> Field must not be empty.
+						</div>
+						<div id="name-alert" class="alert alert-danger alert-dismissable" style="display:none;">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Error!</strong> Username must be (Admin)minimum 4 characters long
+						</div>
+
+						<div id="pass-alert" class="alert alert-danger alert-dismissable" style="display:none;">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>Error!</strong> Password must be (Admin) minimum 5 characters long
+						</div>
+
+					</div><!-- /.alert -->
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" id="username" class="form-control">
+						</div>
+					</div>
+
+
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" id="password" class="form-control">
+						</div>
+					</div>
+
+
+					<div class="col-md-12">
+						<div class="form-group">
+							<button class="btn btn-info" id="reset">Reset</button>
+							<button class="btn btn-success pull-right" id="login">Login</button>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+    </body>
+</html>
